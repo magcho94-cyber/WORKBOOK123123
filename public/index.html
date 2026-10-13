@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>종로M ENGLISH · READING WORKBOOK</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><img src="/jongrom-logo.png" alt="종로M 로고"><div><strong>JONG-RO M ENGLISH</strong><span>READING WORKBOOK STUDIO</span></div></div>
+    <span id="ai" class="pill">AI 연결 확인 중</span>
+  </header>
+  <main class="wrap">
+    <section id="workbook" class="panel active">
+      <div class="hero"><span class="eyebrow">JONG-RO M ENGLISH</span><h1>영어 지문 워크북 만들기</h1><p>READING · STEP 1–5 · 학생용 · 교사용</p></div>
+      <div class="grid">
+        <div class="card span2"><h2>워크북 설정</h2><label>제목<input id="wbTitle" value="English Reading Workbook" maxlength="150"></label><p class="hint">영어 지문을 넣고 생성하세요. 문단 분석을 먼저 보여주고, READING 그림은 이어서 자동으로 채워집니다.</p></div>
+        <div class="card span2 signatureCard"><div><h2>종로M 시그니처 캐릭터</h2><p class="hint">배경이 없는 캐릭터 기준 그림을 사용합니다. 두 안내자의 외형은 유지하고, 각 컷의 장면은 해당 지문에 나온 내용으로만 만듭니다.</p></div><img src="/mascot_reference.png" alt="동그란 안경을 쓴 안내자와 노란 재킷의 단발머리 안내자"></div>
+        <div class="card span2 wbModeCard"><h2>자료 종류</h2><div class="wbModeButtons" role="group" aria-label="워크북 자료 종류"><button id="wbModeTextbook" type="button" aria-pressed="true" onclick="setWorkbookMode('textbook')">교과서</button><button id="wbModeMock" class="secondary" type="button" aria-pressed="false" onclick="setWorkbookMode('mock')">모의고사 18–45번</button></div></div>
+        <div id="wbTextbookInputs" class="span2 wbInputSection"><div class="card paragraphIntro"><div><h2>교과서 문단 입력</h2><p class="hint">1문단, 2문단을 각각 입력하세요. 비워 둔 문단은 생성하지 않습니다.</p></div><button type="button" class="secondary" onclick="addWorkbookParagraph()">+ 문단 추가</button></div><div id="wbParagraphs" class="paragraphList"></div></div>
+        <div id="wbMockInputs" class="span2 wbInputSection hidden"><div class="card"><h2>모의고사 번호별 지문</h2><p class="hint">18번부터 45번까지 번호를 눌러 본문을 입력하세요. 영어 본문을 넣은 번호만 각각 독립된 워크북으로 만듭니다. 빈 번호는 건너뜁니다. <span id="wbMockCount">0개 번호 입력됨</span></p></div><div id="wbMockSlots" class="wbMockSlots"></div></div>
+        <div class="card span2 actionCard"><div><strong>모든 문장 활용</strong><span>READING은 3문장을 기본으로, 마지막에는 4~5문장까지 한 페이지에 싣습니다. 삽화는 3컷을 기본으로 하고, 문장 사이 연결 설명도 함께 표시합니다.</span></div><button id="wbStart" onclick="startWorkbook()">워크북 생성</button></div>
+        <div class="card span2 hidden" id="wbProgressCard"><h2 id="wbProgressTitle">생성 중</h2><div class="wbProgressTrack"><div id="wbProgressFill"></div></div><p id="wbProgressText" class="wbProgressText"></p><button id="wbRetry" class="secondary hidden" onclick="retryWorkbookImages()">실패한 항목 다시 만들기</button></div>
+      </div>
+    </section>
+
+    <section id="output" class="output hidden">
+      <div class="outputBar"><div><strong>생성 결과</strong><span id="outputMeta"></span></div><div id="workbookPrint"><button class="secondary" onclick="printWorkbook('student')">학생용 PDF 저장</button><button class="secondary" onclick="printWorkbook('teacher')">교사용 PDF 저장</button><button id="wbRetryOutput" class="secondary hidden" onclick="retryWorkbookImages()">실패한 항목 재시도</button><button class="secondary" onclick="downloadWorkbookDraft()">초안 JSON</button><button onclick="closeWorkbookOutput()">편집으로 돌아가기</button></div></div>
+      <div id="paper"></div>
+    </section>
+  </main>
+  <script src="/workbook.js"></script>
+</body>
+</html>
